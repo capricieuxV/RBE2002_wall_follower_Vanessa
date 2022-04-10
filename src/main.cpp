@@ -12,5 +12,5 @@ void setup() {
 
 void loop() 
 {
-  robot.wall_following(10,35, true);
+  robot.wall_following(10,35);
 }
