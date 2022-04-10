@@ -20,17 +20,12 @@ void Wall_follower::setConstant(float kp, float kd){
 }
 
 // PD controller for wall follower
-void Wall_follower::wall_following(float dis, float baseEffort, bool leftSide){
+void Wall_follower::wall_following(float dis, float baseEffort){
     float currentDist = ir_sensor.ReadData();
     err = dis - currentDist; // +: curr < target; -: curr > target
     float effort = Kp * err + Kd * (err-lastErr); // +: curr <  target -: curr > target
-    if(leftSide){
-      speed_controller.Process(baseEffort+effort, baseEffort-effort);
-    }
-    else{
-      setConstant(2.3,1);
-      speed_controller.Process(baseEffort-effort, baseEffort+effort);
-    }
+
+    speed_controller.Process(baseEffort+effort, baseEffort-effort);
     lastErr = err;
 }
     
