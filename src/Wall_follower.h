@@ -23,8 +23,9 @@ class Wall_follower{
         float err = 0.0;
         float last = 0;
         void init();
+        void setConstant(float kp, float kd);
         float getDistanceSonar();
-        void wall_following(float dis, float baseEffort);
+        void wall_following(float dis, float baseEffort, bool left);
 };
 
 #endif
