@@ -3,7 +3,7 @@
 
 #include <Romi32U4.h>
 
-class Encoder{
+class Encoders{
     private:
         const float N_wheel = 1440.0; //counts per wheel revolution
         const float R_wheel = 35.0; //radius of wheel in [mm]
@@ -12,8 +12,10 @@ class Encoder{
         
     public:
         void Init(void);
-        float ReadVelocityLeft(void); //[mm/s]
-        float ReadVelocityRight(void); //[m/s]
+        int ReadEncoderCountLeft(void);
+        int ReadEncoderCountRight(void);
+        float ReadVelocityLeft(void); 
+        float ReadVelocityRight(void); 
         void PrintVelocities(void);
         boolean UpdateEncoderCounts(void);
 };

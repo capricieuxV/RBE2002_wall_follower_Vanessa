@@ -2,6 +2,8 @@
 #define SPEED_CONTROLLER
 
 #include <Romi32U4.h>
+#include <Encoders.h>
+#include <Encoder.h>
 
 class SpeedController{
     private:
@@ -11,6 +13,8 @@ class SpeedController{
         float E_right = 0;
 
     public:
+        Romi32U4Motors motors;
+        Encoders MagneticEncoder;    
         void Init(void);
         void Process(float, float); //set velocity [mm/s]
         void Stop(void);

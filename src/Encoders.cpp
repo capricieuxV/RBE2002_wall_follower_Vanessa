@@ -9,12 +9,13 @@ uint32_t last_update = 0;
 
 Romi32U4Encoders encoders;
 
-void Encoder::Init(void)
+void Encoders::Init(void)
 {
-    //nothing to initialize, however, good practice to have an init function anyway
+    //nothing to initialize, however, good practice to have a init function anyway
+    encoders.init();
 }
 
-void Encoder::PrintVelocities(void)
+void Encoders::PrintVelocities(void)
 {
     Serial.print("Velocity of left wheel: ");
     Serial.print(ReadVelocityLeft());
@@ -23,19 +24,29 @@ void Encoder::PrintVelocities(void)
     Serial.println(ReadVelocityRight());
 }   
 
-float Encoder::ReadVelocityLeft(void)
+int Encoders::ReadEncoderCountLeft(void)
+{
+  return count_left;
+}
+
+int Encoders::ReadEncoderCountRight(void)
+{
+  return count_right;
+}
+
+float Encoders::ReadVelocityLeft(void)
 {
     float measurement = (C_wheel/N_wheel)*(count_left-prev_count_left)/((float)interval/1000);
     return measurement;
 }
 
-float Encoder::ReadVelocityRight(void)
+float Encoders::ReadVelocityRight(void)
 {
     float measurement = (C_wheel/N_wheel)*(count_right-prev_count_right)/((float)interval/1000);
     return measurement;
 }
 
-boolean Encoder::UpdateEncoderCounts(void)
+boolean Encoders::UpdateEncoderCounts(void)
 {
   uint32_t now = millis();
   if(now - last_update >= interval)
